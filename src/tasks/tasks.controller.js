@@ -1,10 +1,10 @@
 const {StatusCodes} = require("http-status-codes");
 const createTaskProvider = require("./providers/createTask.provider.js")
+const getTaskProvider = require("./providers/getTask.provider.js");
 
-function handleGetTask(req,res){
-  let response = 
-  
-  res.status(StatusCodes.OK).json(response);
+async function handleGetTask(req,res){
+  const tasks = await getTaskProvider(req,res);
+  res.status(StatusCodes.OK).json(tasks);
 }
 
 async function handlePostTask(req,res){

@@ -1,32 +1,14 @@
 const {StatusCodes} = require("http-status-codes");
-const Task = require("./task.schema.js");
+const createTaskProvider = require("./providers/createTask.provider.js")
 
 function handleGetTask(req,res){
-  let response = [
-    {
-      title:"HomeWork",
-      priority:"Urgent"
-    },
-    {
-      title:"something-else",
-      priority:"light"
-    }
-  ];
+  let response = 
   
   res.status(StatusCodes.OK).json(response);
 }
 
 async function handlePostTask(req,res){
-  const task = new Task({
-    title:req.body.title,
-    description:req.body.description,
-    status:req.body.status,
-    priority:req.body.priority,
-    dueDate:req.body.dueDate,
-  });
-
-  await task.save();
-
+  const task = await createTaskProvider(req, res);
   res.status(StatusCodes.CREATED).json(task);
 }
 

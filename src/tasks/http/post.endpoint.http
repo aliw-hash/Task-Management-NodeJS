@@ -2,9 +2,10 @@ POST http://localhost:3001/tasks
 Content-Type: application/json
 
 {
-  "title":"excercise 2",
+  "title":"excercise 786",
   "dueDate":"2025-01-01T12:00:00Z",
-  "description":"dsfkjsdfksflknskfjdnskfnklsnflksnflknskfnklsdfnknflasnfkjsnfdkjn",
+  "description":"dsfkjsdfksflknskfjdnskfnklsnflksnflk",
   "priority":"normal",
-  "status":"todo"
+  "status":"todo",
+  "extra":"extra content"
 }

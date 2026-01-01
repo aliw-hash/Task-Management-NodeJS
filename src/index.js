@@ -8,6 +8,7 @@ const tasksRouter = require("./tasks/tasks.router.js");
 const authRouter = require("./auth/auth.router.js");
 const usersRouter = require("./users/users.router.js");
 const mongoose = require("mongoose");
+const expressWinstonLogger = require("./middleware/expressWinston.middleware.js");
 
 const app = express();
 const port = 3001;
@@ -28,7 +29,9 @@ let accessLogStream = fs.createWriteStream(
 
 app.use(morgan("combined",{stream:accessLogStream}));
 app.use(responseFormatter); //it's like we are difining the formatter first to all upcoming response
+app.use(expressWinstonLogger);
 
+//define routes
 app.use("/",tasksRouter);   //middleware
 app.use("/auth",authRouter);   //middleware
 app.use("/users",usersRouter);

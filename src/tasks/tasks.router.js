@@ -14,7 +14,7 @@ tasksRouter.post("/tasks", createTaskValidator,
     const result = validationResult(req);
   
     if(result.isEmpty()){
-      return tasksController.handlePostTask(req,res);//the args didn't passed by sir
+      return tasksController.handlePostTask(req,res);
     }else{
       res.status(StatusCodes.BAD_REQUEST).json(result.array());
     }

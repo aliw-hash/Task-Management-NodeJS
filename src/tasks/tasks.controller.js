@@ -10,8 +10,7 @@ async function handleGetTask(req,res){
 }
 
 async function handlePostTask(req,res){
-  const task = await createTaskProvider(req, res);
-  res.status(StatusCodes.CREATED).json(task);
+  return await createTaskProvider(req, res);
 }
 
 async function handlePatchTask(req,res){

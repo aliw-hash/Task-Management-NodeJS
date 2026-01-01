@@ -6,8 +6,8 @@ const errorLogger = require("../../helpers/errorLogger.helper.js");
 
 async function createTaskProvider(req,res){
   const validatedResult = matchedData(req);
+//inside it req.body can have extra field as well
 
-  //inside it req.body can have extra field as well
   const task = new Task(validatedResult);
   try{
     await task.save();

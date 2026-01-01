@@ -34,7 +34,7 @@ app.use(expressWinstonLogger);
 //define routes
 app.use("/",tasksRouter);   //middleware
 app.use("/auth",authRouter);   //middleware
-app.use("/users",usersRouter);
+app.use("/users",usersRouter);  //middleware
 
 app.use((req, res)=>{
   res.status(StatusCodes.NOT_FOUND).json(null);

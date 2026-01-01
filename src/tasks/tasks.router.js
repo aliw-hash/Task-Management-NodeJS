@@ -1,15 +1,22 @@
 const express = require("express");
 const { StatusCodes } = require("http-status-codes")
-const { body, validationResult } = require("express-validator")
+const { validationResult } = require("express-validator")
 const tasksController = require("./tasks.controller.js");
 const createTaskValidator = require("./validators/createTask.validator.js")
+const getTasksValidator = require("./validators/getTasks.validator.js");
 
 const tasksRouter = express.Router();
 
-tasksRouter.get("/tasks", tasksController.handleGetTask);
+tasksRouter.get("/tasks", getTasksValidator, (req, res)=>{
+  const result = validationResult(req);
+  if(result.isEmpty()){
+      return tasksController.handleGetTask(req,res);
+    }else{
+      res.status(StatusCodes.BAD_REQUEST).json(result.array());
+    }
+});
 
 tasksRouter.post("/tasks", createTaskValidator, 
-
   (req, res) => {
     const result = validationResult(req);
   

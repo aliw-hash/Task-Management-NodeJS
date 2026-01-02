@@ -9,11 +9,15 @@ const authRouter = require("./auth/auth.router.js");
 const usersRouter = require("./users/users.router.js");
 const mongoose = require("mongoose");
 const expressWinstonLogger = require("./middleware/expressWinston.middleware.js");
-
-const app = express();
-const port = 3001;
+const dotenv = require("dotenv");
 const cors = require("cors");
 
+process.env.NODE_ENV = process.env.NODE_ENV || "development";
+const envFile = `.env.${process.env.NODE_ENV}`;
+dotenv.config({path:envFile});
+
+const app = express();
+const port = parseInt(process.env.PORT);
 
 app.use(express.json());
 
@@ -42,8 +46,8 @@ app.use((req, res)=>{
 
 async function bootstrap(){
   try{
-    await mongoose.connect("mongodb+srv://aliw24136_db:passForDB@cluster0.fzdbkwz.mongodb.net/?appName=Cluster0",
-      {dbName:"fullstackTask"}
+    await mongoose.connect(process.env.DATABASE_URL,
+      {dbName:process.env.DATABASE_NAME}
     );
     console.log("DB is connected");
     app.listen(port,() => {

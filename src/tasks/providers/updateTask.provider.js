@@ -8,7 +8,6 @@ async function updateTaskProvider(req, res){
 
   try{
     const task = await Task.findById(req.body["_id"]);//this statement fetches document already available within DB
-
     task.title = validatedData.title || task.title;
     task.description = validatedData.description || task.description;
     task.dueDate = validatedData.dueDate || task.dueDate;

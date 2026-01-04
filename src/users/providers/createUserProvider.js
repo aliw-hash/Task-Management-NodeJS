@@ -8,13 +8,29 @@ async function createUserProvider(req, res){
   const validatedData = matchedData(req);
   
   try{
+    const existingUser = await User.findOne({ email: validatedData.email });
+
+    if(existingUser){
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        message:"A user with same email already exists",
+      });
+    }
     const salt = await bcrypt.genSalt();
-    const hashPassword = await bcrypt.hash(validatedData.password, salt);
-    validatedData.password = hashPassword;
-    const user = new User(validatedData);
+    const hashedPassword = await bcrypt.hash(validatedData.password, salt);
+
+  const user = new User({
+    firstName : validatedData.firstName,
+    lastName : validatedData.lastName,
+    email : validatedData.email,
+    password: hashedPassword,
+  }); //user is mongoDB object not JS one
     await user.save();
-    delete user.password;
-    return res.status(StatusCodes.CREATED).json(user);
+    return res.status(StatusCodes.CREATED).json({
+      _id:user._id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+    });
   }
   catch(error){
     errorLogger("Error while creating user", req, error);

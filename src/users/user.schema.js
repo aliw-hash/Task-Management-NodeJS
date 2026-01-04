@@ -21,13 +21,6 @@ const userSchema = new Schema({
   password:{
     type:String,
     required:[true,"Password is required"],
-    minLength:[8,"password must be atleast 8 characters wide"],
-    validate:{
-      validator : function(password){
-        return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/.test(password);
-      },
-      message:() => `password must be alphanumeric with atleast 1 special char and 1 capital letter`
-    },
   }
 });
 

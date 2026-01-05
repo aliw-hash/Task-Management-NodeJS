@@ -23,9 +23,12 @@
     "express-winston": "^4.2.0",
     "http-status-codes": "^2.3.0",
     "install": "^0.13.0",
+    "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.11.0",
     "mongoose": "^8.8.2",
     "morgan": "^1.10.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
     "winston": "^3.17.0"
   },
   "devDependencies": {

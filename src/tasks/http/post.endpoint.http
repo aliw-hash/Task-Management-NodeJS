@@ -1,5 +1,6 @@
 POST http://localhost:3001/tasks
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2OTVhNDZjYjUxN2IyNTEwMGQyNjM1MWUiLCJlbWFpbCI6ImpvaG5AZG9lLmNvbSIsImlhdCI6MTc2NzYwNjY4MiwiZXhwIjoxNzY3NjkzMDgyfQ.xeUhIEAuKBZWVl5A99T_kRqwKJX8C7vZ78x-40PrN5s
 
 {
   "title":"excercise 50",
@@ -8,5 +9,4 @@ Content-Type: application/json
   "priority":"normal",
   "status":"todo",
   "extra":"extra content",
-  "user":"6952593e4f2fdd87021fb557"
 }

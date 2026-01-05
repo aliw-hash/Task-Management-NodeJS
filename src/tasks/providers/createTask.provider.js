@@ -8,7 +8,8 @@ async function createTaskProvider(req,res){
   const validatedResult = matchedData(req);
 //inside it req.body can have extra field as well
 
-  const task = new Task(validatedResult);
+  const task = new Task({...validatedResult, user: req.user.sub});
+
   try{
     await task.save();
     return res.status(StatusCodes.CREATED).json(task);

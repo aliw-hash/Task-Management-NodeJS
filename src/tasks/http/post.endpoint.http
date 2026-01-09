@@ -8,5 +8,5 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2OTVhNDZjY
   "description":"dsfkjsdfksflknskfjdnskfnklsnflksnflk",
   "priority":"normal",
   "status":"todo",
-  "extra":"extra content",
+  "extra":"extra content"
 }

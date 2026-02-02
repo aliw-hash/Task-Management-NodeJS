@@ -21,7 +21,7 @@ const getTasksValidator = [
 
   query("order", "order must be in ['asc','dsc']")
     .optional()
-    .isIn("asc","dsc"),
+    .isIn(["asc","dsc"]),
   query("order").customSanitizer((value, {req}) => {
     return value? value : 'asc';
   }),

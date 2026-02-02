@@ -8,6 +8,15 @@ async function getTaskProvider(req,res){
   try{
     const totalTasks = await Task.countDocuments();
     const currentPage = data.page;  //returns undefined if page isn't passed in request
+    const totalCompletedTasks = await Task.countDocuments(
+      { user: req.user.sub ,status: "completed"}
+    );
+    const totalTodoTasks = await Task.countDocuments(
+      { user: req.user.sub ,status: "todo"}
+    );
+    const totalInProgressTasks = await Task.countDocuments(
+      { user: req.user.sub ,status: "inProgress"}
+    );
     const limit = data.limit;
     const order = data.order;
     const totalPages = Math.ceil(totalTasks/limit);
@@ -16,10 +25,11 @@ async function getTaskProvider(req,res){
     const baseUrl = `${req.protocol}://${req.get("host")}${req.originalUrl.split("?")[0]}`;
 
     const tasks = await Task.find({
-      status: {$in:["todo","inProgress"]}
+      user: req.user.sub,
+      status: { $in: ["todo", "inProgress"] },
     })
       .limit(limit)
-      .skip(currentPage-1)
+      .skip(currentPage - 1)
       .sort({
         createdAt: order==="asc"? 1 : -1,
       });
@@ -31,14 +41,17 @@ async function getTaskProvider(req,res){
           itemsPerPage: limit,
           totalItems: totalTasks,
           currentPage: currentPage,
-          totalPages: totalPages, 
+          totalPages: totalPages,
+          totalCompletedTasks: totalCompletedTasks,
+          totalTodoTasks: totalTodoTasks,
+          totalInProgressTasks: totalInProgressTasks
         },
         links:{
-          first:`${baseUrl}/?limit=${limit}?page=${1}?order=${order}`,
-          last:`${baseUrl}/?limit=${limit}?page=${totalPages}?order=${order}`,
-          current:`${baseUrl}/?limit=${limit}?page=${currentPage}?order=${order}`,
-          previous:`${baseUrl}/?limit=${limit}?page=${prevPage}?order=${order}`,
-          next:`${baseUrl}/?limit=${limit}?page=${nextPage}?order=${order}`,
+          first:`${baseUrl}/?limit=${limit}&page=${1}&order=${order}`,
+          last:`${baseUrl}/?limit=${limit}&page=${totalPages}&order=${order}`,
+          current:`${baseUrl}/?limit=${limit}&page=${currentPage}&order=${order}`,
+          previous:`${baseUrl}/?limit=${limit}&page=${prevPage}&order=${order}`,
+          next:`${baseUrl}/?limit=${limit}&page=${nextPage}&order=${order}`,
         }
       }
     }

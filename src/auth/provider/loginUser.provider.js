@@ -2,7 +2,7 @@ const { StatusCodes } = require("http-status-codes");
 const errorLogger = require("../../helpers/errorLogger.helper.js");
 const {matchedData} = require("express-validator");
 
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const getUserByEmail = require("../../users/providers/getUserByEmail.provider.js");
 const generateTokenProvider = require("./generateToken.provider.js");
 

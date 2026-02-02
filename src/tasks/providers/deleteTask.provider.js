@@ -6,7 +6,7 @@ const {matchedData} = require("express-validator");
 async function deleteTaskProvider(req, res){
   const validatedData = matchedData(req);
   try{
-    const deletedtask = await Task.deleteOne({ _id: validatedData["_id"] });
+    const deletedtask = await Task.deleteOne({ _id: req.user.sub });
     return res.status(StatusCodes.OK).json(deletedtask);
   }catch(error){
     errorLogger("Error while deleting the task",req,error);

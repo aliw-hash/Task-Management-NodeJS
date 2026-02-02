@@ -6,7 +6,9 @@ const errorLogger = require("../../helpers/errorLogger.helper.js");
 async function getTaskProvider(req,res){
   const data = matchedData(req);
   try{
-    const totalTasks = await Task.countDocuments();
+    const totalTasks = await Task.countDocuments({
+      status: { $in: ['todo', 'inProgress'] }
+    });
     const currentPage = data.page;  //returns undefined if page isn't passed in request
     const totalCompletedTasks = await Task.countDocuments(
       { user: req.user.sub ,status: "completed"}

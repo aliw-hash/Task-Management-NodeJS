@@ -12,7 +12,7 @@ const tasksRouter = express.Router();
 
 
 tasksRouter.get(
-  "/tasks", 
+  "/tascs", 
   [getTasksValidator, authToken], 
   (req, res)=>{
   const result = validationResult(req);

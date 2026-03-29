@@ -24,9 +24,9 @@ function configApp(app){
   app.use(expressWinstonLogger);
 
   //define routes
-  app.use("/api/",tasksRouter);   //middleware
-  app.use("/api/auth",authRouter);   //middleware
-  app.use("/api/users",usersRouter);  //middleware
+  app.use("/",tasksRouter);   //middleware
+  app.use("/auth",authRouter);   //middleware
+  app.use("/users",usersRouter);  //middleware
 
   app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
 
